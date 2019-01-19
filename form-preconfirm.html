@@ -8,7 +8,7 @@
 
 <head>
 
-	<script src="http://d3js.org/d3.v3.min.js"></script>
+	<script src="https://d3js.org/d3.v3.min.js"></script>
 	<script src="{% static 'radar-chart.js' %}"></script>
 	<link rel="stylesheet" href="{% static 'radar-chart.css' %}" type="text/css" media="all">
 	<script src="https://code.jquery.com/jquery-3.3.1.js" integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60=" crossorigin="anonymous"></script>	
@@ -100,17 +100,27 @@
 		<hr>
 		<div class="row">
 			{% if risk_score %}
-			<div class="col-4">
-				<input type="submit" value="SAFU Insured Transaction (with {{ premium }} ETH premium)" class="btn btn-success btn-lg">
-			</div>
+			<table>
+				<tr>
+					<td>
+						<div class="col-4">
+							<input type="submit" value="SAFU Insured Transaction (with {{ premium }} ETH premium)" class="btn btn-success btn-lg">
+						</div>
+					</td>
 
-			<div class="col-4" align="center">
-				<input type="submit" value="Regular Txn (without premium)" class="btn btn-warning btn-lg">
-			</div>
+					<td>
+						<div class="col-4" align="center">
+							<input type="submit" value="Regular Txn (without premium)" class="btn btn-warning btn-lg">
+						</div>
+					</td>
 
-			<div class="col-4" align="right">
-				<input type="submit" value="Cancel Txn" class="btn btn-dark btn-lg">
-			</div>
+					<td>
+						<div class="col-4" align="right">
+							<input type="submit" value="Cancel Txn" class="btn btn-dark btn-lg">
+						</div>
+					</td>
+				</tr>
+			</table>
 			{% endif %}					
 		</div>	
 	</div>

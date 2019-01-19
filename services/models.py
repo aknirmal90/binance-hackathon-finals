@@ -28,7 +28,13 @@ features = [
     'percentage_out_internal_volume',
     'xbc_having_div',
     'ratio_txncnt_outflow_inflow',
-    'ratio_txnvol_outflow_inflow',
+    'ratio_txnvol_outflow_inflow',  
+    'pearson_in_out_amount',
+    'ratio_median_out_amount',
+    'ratio_median_in_amount',
+    'ratio_pay_no_withdraw',
+    'active_in_days_percentage',
+    'percentage_out_txs_count',
 ]
 features_df = df[features]
 
@@ -63,7 +69,13 @@ def get_address_risk_metrics(address):
         'percentage_out_internal_volume',
         'xbc_having_div',
         'ratio_txncnt_outflow_inflow',
-        'ratio_txnvol_outflow_inflow',        
+        'ratio_txnvol_outflow_inflow',  
+        'pearson_in_out_amount',
+        'ratio_median_out_amount',
+        'ratio_median_in_amount',
+        'ratio_pay_no_withdraw',
+        'active_in_days_percentage',
+        'percentage_out_txs_count',
     ]
 
     feature_df = feature_map_ds3([address])
