@@ -25,7 +25,7 @@ features = [
     # 'frequency_stddev_days_out'    
     'active_out_days_percentage',
     'ratio_out_in_uniq_addresses',
-    'percentage_out_internal_volume',
+    'percentage_out_txs_count', #'percentage_out_internal_volume',
     'xbc_having_div',
     'ratio_txncnt_outflow_inflow',
     'ratio_txnvol_outflow_inflow',  
@@ -66,7 +66,7 @@ def get_address_risk_metrics(address):
         # 'frequency_stddev_days_out'        
         'active_out_days_percentage',
         'ratio_out_in_uniq_addresses',
-        'percentage_out_internal_volume',
+        'percentage_out_txs_count', #'percentage_out_internal_volume',
         'xbc_having_div',
         'ratio_txncnt_outflow_inflow',
         'ratio_txnvol_outflow_inflow',  

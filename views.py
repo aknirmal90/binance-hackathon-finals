@@ -58,7 +58,7 @@ class QueryFormView(TemplateView):
 
 		# source = ColumnDataSource(dict(x=x, y=y))
 		t = Title()
-		t.text = 'Risk Profile for Lenders'
+		t.text = 'Cumulative By Lenders'
 
 		# plot = Plot(
 		#     title=t, plot_width=500, plot_height=300,
