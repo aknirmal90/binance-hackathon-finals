@@ -40,7 +40,7 @@
 				<br>
 
 				{% if not risk_score %}
-					<input type="submit" value="Get Quote" class="btn btn-primary">
+					<input type="submit" value="Get Quote For SAFU" class="btn btn-primary btn-lg">
 				{% endif %}					
 			</div>				
 			</form>
@@ -55,7 +55,7 @@
 					<table>
 						<tr>
 							<td style="text-align:center"><h2>Risk Score</h2></td>
-							<td style="text-align:center"><h2>Premium</h2></td>
+							<td style="text-align:center"><h2>Insurance Premium</h2></td>
 							<td style="text-align:center"><h2>Premium Amount</h2></td>
 						</tr>
 
@@ -99,15 +99,15 @@
 		<div class="row">
 			{% if risk_score %}
 			<div class="col-4">
-				<input type="submit" value="Confirm Txn (with premium)" class="btn btn-success">
+				<input type="submit" value="SAFU Insured Transaction (with {{ premium }} ETH premium)" class="btn btn-success btn-lg">
 			</div>
 
 			<div class="col-4" align="center">
-				<input type="submit" value="Confirm Txn (without premium)" class="btn btn-warning">
+				<input type="submit" value="Regular Txn (without premium)" class="btn btn-warning btn-lg">
 			</div>
 
 			<div class="col-4" align="right">
-				<input type="submit" value="Cancel Txn" class="btn btn-dark">					
+				<input type="submit" value="Cancel Txn" class="btn btn-dark btn-lg">
 			</div>
 			{% endif %}					
 		</div>	

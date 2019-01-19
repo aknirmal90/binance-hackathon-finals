@@ -23,5 +23,5 @@ class QueryForm(forms.Form):
             'placeholder': 'Destination Address'
         })
         self.fields['transaction_value'].widget.attrs.update({
-            'placeholder': 'Amount'
+            'placeholder': 'Amount, ETH'
         })
