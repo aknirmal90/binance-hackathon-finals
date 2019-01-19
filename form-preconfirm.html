@@ -76,6 +76,7 @@
 			{% if risk_score %}						
 			<div class="row" style="height:400px">
 				<div class="col-12" style="text-align:center">
+                    <h3>Source <-> Destination Historical Relations</h3>
 					<div id="address_graph"></div>
 				</div>
 			</div>
@@ -85,7 +86,10 @@
 		<div class="row">			
 			{% if risk_score %}
 				<div class="col-2"></div>
-				<div class="col-4 radar-container" align="left-middle" vertical-align="middle"></div>
+				<div class="col-4" align="left-middle" vertical-align="middle">
+                    <h3>Destination Address Features</h3>
+                    <div class="radar-container"></div>
+                </div>
 				<div class="col-4 bar-container" align="left-middle" vertical-align="middle">
 					{{div|safe}}
 					{{script|safe}}
