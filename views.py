@@ -5,7 +5,7 @@ from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
 from services.models import get_address_risk_metrics
 from django.shortcuts import redirect
-from lenders import get_lenders
+from lenders import get_lenders, get_insurance_premium
 from bokeh.embed import components
 from bokeh.plotting import figure
 from bokeh.models.glyphs import Step
@@ -29,12 +29,15 @@ class QueryFormView(TemplateView):
 			return render(request, self.template_name, context)
 
 		address = request.POST['destination_address']
-		amount = request.POST['transaction_amount']
+		amount = request.POST['transaction_value']
 
 		risk_metrics = get_address_risk_metrics(address)
 		risk_score = risk_metrics['risk_score']
 		risk_features = risk_metrics['risk_features']
-		lenders_features = get_lenders(amount=amount)
+		lenders_features = get_lenders()
+		premium_rate = get_insurance_premium(risk_score=risk_score, lenders_profile=lenders_features)
+		premium = premium_rate * risk_score
+
 		script, div = self._components(lenders_features)
 
 		context = {
@@ -43,7 +46,9 @@ class QueryFormView(TemplateView):
 			'risk_features': risk_features,
 			'script': script,
 			'div': div,
-			'destination_address': address
+			'destination_address': address,
+			'premium_rate': premium_rate,
+			'premium': premium
 		}
 		return render(request, self.template_name, context)
 
