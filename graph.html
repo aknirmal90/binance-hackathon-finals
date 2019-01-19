@@ -36,22 +36,43 @@
 
         $( window ).on( "load", function(){
 
-            var address='0xe1f3294e25bb72a2fb53addb82aa1a033797e6e3';
-            var label  = 'YOUR ADDRESS:'+address;
+            var source='0xe1f3294e25bb72a2fb53addb82aa1a033797e6e3';
+            var destination='0xfef4c8d00521696871857c12a098f86c6bc5340e';
+
             var graph = new Graph(new vis.DataSet([]),
                 new vis.DataSet([
                     {
-                        'id': address,
-                        'label': label,
-                        'group': 'address',
-                        'title': address,
-                        'link': ''
+                        'id': source,
+                        'label': 'SOURCE:'+source.substring(0,10)+'...',
+                        'group': 'source',
+                        'title': source,
+                        'link': '',
+						x: 0,
+						y: 200
+                    },
+                    {
+                        'id': destination,
+                        'label': 'DESTINATION:'+destination.substring(0,10)+'...',
+                        'group': 'destination',
+                        'title': destination,
+                        'link': '',
+						x: 500,
+						y: 200
                     }
 				]), '/graph'
 			);
 
             graph.draw();
-            graph.expand(graph.nodes.getIds()[0]);
+
+            setTimeout(function(){
+                graph.expand(graph.nodes.getIds()[0]);
+            }, 800);
+
+            setTimeout(function(){
+                graph.expand(graph.nodes.getIds()[1]);
+			}, 1600);
+
+
 
         } );
 
@@ -75,7 +96,7 @@
                     barnesHut: {
                         damping: 0.4,
                         avoidOverlap: 0.1,
-                        springConstant: 0.02
+                        springConstant: 0.17
                     }
                 },
                 groups: {
@@ -88,7 +109,7 @@
                             color: '#f0a30a'
                         }
                     },
-                    multisig: {
+                    destination: {
                         shape: 'icon',
                         icon: {
                             face: 'Glyphicons Halflings',
@@ -97,12 +118,21 @@
                             color: '#03a9f4'
                         }
                     },
+                    source: {
+                        shape: 'icon',
+                        icon: {
+                            face: 'Glyphicons Halflings',
+                            code: '\ue008',
+                            size: 60,
+                            color: '#009688'
+                        }
+                    },
                     address: {
                         shape: 'icon',
                         icon: {
                             face: 'Glyphicons Halflings',
                             code: '\ue008',
-                            size: 30,
+                            size: 20,
                             color: '#009688'
                         }
                     },
@@ -113,33 +143,6 @@
                             code: '\ue201',
                             size: 70,
                             color: '#ff5722'
-                        }
-                    },
-                    dex: {
-                        shape: 'icon',
-                        icon: {
-                            face: 'Glyphicons Halflings',
-                            code: '\ue031',
-                            size: 70,
-                            color: '#03a9f4'
-                        }
-                    },
-                    MarginPositionToken: {
-                        shape: 'icon',
-                        icon: {
-                            face: 'Glyphicons Halflings',
-                            code: '\ue245',
-                            size: 70,
-                            color: '#ff5722'
-                        }
-                    },
-                    system: {
-                        shape: 'icon',
-                        icon: {
-                            face: 'Glyphicons Halflings',
-                            code: '\ue135',
-                            size: 40,
-                            color: '#009688'
                         }
                     }
                 }
@@ -296,6 +299,7 @@
 
                 var value = parseFloat(data[4])<=1e-6 ? data[4] : numeral(data[4]).format('0.0000a')
 
+
                 switch(data[1]){
                     case 'transfer_from':
                         return {
@@ -303,7 +307,7 @@
                             to: node_address,
                             arrows: 'to',
                             label: value + ' ' + currency_name,
-                            color: {color: '#ff5722', highlight: '#ff5722'},
+                            color: {color: 'grey', highlight: '#ff5722'},
                             font: {align: 'middle', multi: true},
                             smooth: true,
                             width: width,
@@ -316,51 +320,14 @@
                             to: node.id,
                             arrows: 'to',
                             label: value + ' ' + currency_name,
-                            color:  {color: '#ff5722', highlight: '#ff5722'},
+                            color:  {color: 'grey', highlight: '#ff5722'},
                             font: {align: 'middle', multi: true},
                             smooth: true,
                             width: width,
                             select_type: 'select_transfers',
                             hidden: !this.display_edges['select_transfers']
                         };
-                    case 'call':
-                        return {
-                            from: node_address,
-                            to: node.id,
-                            arrows: 'to',
-                            label: data[3],
-                            smooth: true,
-                            color:  {color: '#00FF00', highlight: '#00FF00'},
-                            width: width_counts,
-                            select_type: 'select_calls',
-                            hidden: !this.display_edges['select_calls']
-                        };
-                    case 'reference':
-                        return {
-                            from: node.id,
-                            to: node_address,
-                            arrows: 'to',
-                            label: data[3],
-                            smooth: true,
-                            color:  {color: '#03a9f4', highlight: '#03a9f4'},
-                            dashes: true,
-                            width: width_counts,
-                            select_type: 'select_references',
-                            hidden: !this.display_edges['select_references']
-                        };
-                    case 'called':
-                        return {
-                            from: node.id,
-                            to: node_address,
-                            arrows: 'to',
-                            label: data[3],
-                            smooth: true,
-                            color:  {color: '#00FF00', highlight: '#00FF00'},
-                            dashes: true,
-                            width: width_counts,
-                            select_type: 'select_calls',
-                            hidden: !this.display_edges['select_calls']
-                        };
+
                 }
             };
 

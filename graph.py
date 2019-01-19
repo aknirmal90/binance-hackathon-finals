@@ -33,7 +33,7 @@ def nodes_by_address(address):
           WHERE transfer_to_bin=unhex('{}') and currency_id=1
           GROUP BY address
           ORDER BY amount desc
-          LIMIT 100
+          LIMIT 10
 
           UNION ALL
 
@@ -50,7 +50,7 @@ def nodes_by_address(address):
           WHERE transfer_from_bin=unhex('{}') and currency_id=1
           GROUP BY address
           ORDER BY amount desc
-          LIMIT 100"""
+          LIMIT 10"""
 
     rows = conn.execute(query_graph.format(address[2:],address[2:]))
     return list(map(lambda t: node_of(t), rows.fetchall()))
