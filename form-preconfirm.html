@@ -12,6 +12,10 @@
 	<script src="{% static 'radar-chart.js' %}"></script>
 	<link rel="stylesheet" href="{% static 'radar-chart.css' %}" type="text/css" media="all">
 	<script src="https://code.jquery.com/jquery-3.3.1.js" integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60=" crossorigin="anonymous"></script>	
+    <link href="{% static 'bokeh-1.0.2.min.css' %}" rel="stylesheet" type="text/css">
+    <link href="{% static 'bokeh-widgets-1.0.2.min.css' %}" rel="stylesheet" type="text/css">
+    <script src="{% static 'bokeh-1.0.2.min.js' %}"></script>
+    <script src="{% static 'bokeh-widgets-1.0.2.min.js' %}"></script>
 </head>
 
 <body>
@@ -36,7 +40,11 @@
 		{% if risk_score %}
 			<div class="row">			
 				<div class="col-2"></div>
-				<div class="col-8 chart-container" align="left-middle" vertical-align="middle">			
+				<div class="col-4 radar-container" align="left-middle" vertical-align="middle"></div>
+				<div class="col-4 bar-container" align="left-middle" vertical-align="middle">
+					{{div|safe}}
+					{{script|safe}}
+				</div>	
 				<div class="col-2"></div>						
 			</div>
 		{% endif %}
@@ -55,10 +63,12 @@
 		    //   {axis: "dexterity", value: 9},  
 		    //   {axis: "luck", value: 2, xOffset: -20}
 		    // ]
-		    axes: {{ risk_features|safe }}
+		    axes: {{ risk_features|safe }},
 		  },
 		];		
-		RadarChart.draw(".chart-container", data);
+		RadarChart.defaultConfig.w = 500;
+		RadarChart.defaultConfig.h = 300;		
+		RadarChart.draw(".radar-container", data);
 	</script>
 
 </html>
