@@ -1,0 +1,53 @@
+{% load static %}
+
+{% include 'material/includes/material_css.html' %}
+{% include 'material/includes/material_js.html' %}
+{% load material_form %}
+
+<html>
+
+<head>
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+</head>
+
+<body>
+	<div class="container-fluid">
+		<div class="row" style="vertical-align:middle">
+			<div class="col-2"></div>
+			<div class="col-8" align="left-middle" vertical-align="middle">
+
+			<form method="POST" action="/form/">
+				<h1 align="center">Check Risk Score!</h1>
+				<br><br>
+				{% csrf_token %}
+				{% form form=form %}{% endform %}
+				<br>
+				<input type="submit" value="Submit" class="btn btn-primary">
+			</div>				
+			</form>
+
+			<div class="col-2"></div>
+		</div>
+
+		{% if risk_score %}
+			<div class="row">
+				<div class="col-4"></div>
+				<div class="col-4" align="center">
+					<h1>Risk Score</h1>
+				</div>
+				<div class="col-4"></div>
+			</div>
+
+			<div class="row">
+				<div class="col-4"></div>
+				<div class="col-4" align="center">
+					<h1 style="font-size: 225px">{{ risk_score }}</h1>
+				</div>
+				<div class="col-4"></div>
+			</div>
+		{% endif %}
+	</div>
+
+</body>
+
+</html>
