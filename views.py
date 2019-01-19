@@ -48,9 +48,8 @@ class QueryFormView(TemplateView):
 			'div': div,
 			'destination_address': address,
 			'premium_rate': premium_rate,
-			'premium': premium
+			'premium': premium / 100.00
 		}
-		import pdb; pdb.set_trace();
 		return render(request, self.template_name, context)
 
 	def _components(self, lenders_features):		
@@ -65,7 +64,7 @@ class QueryFormView(TemplateView):
 		    title=t, plot_width=500, plot_height=300,
 		    h_symmetry=False, v_symmetry=False, min_border=0, toolbar_location=None)
 
-		glyph1 = Step(x="x", y="y", line_color="#f46d43", mode="before")
+		glyph1 = Step(x="x", y="y", line_color="#f46d43", mode="before", color='black')
 		plot.add_glyph(source, glyph1)		
 		plot.xaxis.ticker = x
 		plot.yaxis.ticker = y

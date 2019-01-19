@@ -77,14 +77,15 @@ def get_lenders():
 	prev_lender_risk = 0
 
 	for lender_risk, lender_premium in lender_profile_sorted:
-		continous_profile.extend([(str(i+1), lender_premium) for i in range(prev_lender_risk, lender_risk)])
+		continous_profile.extend([((i+1), lender_premium) for i in range(prev_lender_risk, lender_risk)])
 		prev_lender_risk = lender_risk
 	return continous_profile
 
 
 def get_insurance_premium(risk_score, lenders_profile):
 	premium = 100
-	for risk_threshold in lenders_profile:
-		if risk_threshold == risk_score:
-			premium = lenders_profile[risk_score]
+	for risk_threshold, premium_rate in lenders_profile:
+		if risk_threshold >= int(risk_score):
+			premium = premium_rate
+			return premium
 	return premium

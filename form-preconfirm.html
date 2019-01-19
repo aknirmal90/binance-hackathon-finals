@@ -33,10 +33,6 @@
 
 				{% if not risk_score %}
 					<input type="submit" value="Get Quote" class="btn btn-primary">
-				{% else %}
-					<input type="submit" value="Confirm Txn (with premium)" class="btn btn-primary">
-					<input type="submit" value="Confirm Txn (without premium)" class="btn btn-primary">
-					<input type="submit" value="Cancel Txn" class="btn btn-primary">					
 				{% endif %}					
 			</div>				
 			</form>
@@ -44,17 +40,27 @@
 			<div class="col-2"></div>
 		</div>
 
-		{% if not risk_score %}
-			<div class="row">
+		<div class="row">
+			{% if risk_score %}			
 				<div class="col-2"></div>
-				<div class="col-8">
-					Risk Score {{ risk_score }}
-					Premium % {{ premium_rate }}
-					Premium Amount (ETH) {{ premium_amount }}
+				<div class="col-8" style="text-align:center">
+					<table>
+						<tr>
+							<td style="text-align:center"><h2>Risk Score</h2></td>
+							<td style="text-align:center"><h2>Premium %</h2></td>
+							<td style="text-align:center"><h2>Premium Amount (ETH)</h2></td>
+						</tr>
+
+						<tr>
+							<td style="text-align:center"><h4>{{ risk_score }}</h4></td>
+							<td style="text-align:center"><h4>{{ premium_rate }}</h4></td>
+							<td style="text-align:center"><h4>{{ premium }}</h4></td>
+						</tr>
+					</table>
 				</div>
 				<div class="col-2"></div>
-			</div>
-		{% endif %}
+			{% endif %}				
+		</div>
 
 		<div class="row">			
 			{% if risk_score %}
@@ -68,6 +74,27 @@
 			{% endif %}								
 		</div>
 	</div>
+
+
+	<div class="container">
+		<hr>
+		<div class="row">
+			{% if risk_score %}
+			<div class="col-4">
+				<input type="submit" value="Confirm Txn (with premium)" class="btn btn-primary">
+			</div>
+
+			<div class="col-4" align="center">
+				<input type="submit" value="Confirm Txn (without premium)" class="btn btn-primary">
+			</div>
+
+			<div class="col-4" align="right">
+				<input type="submit" value="Cancel Txn" class="btn btn-primary">					
+			</div>
+			{% endif %}					
+		</div>	
+	</div>
+
 </body>
 
 	<script>
