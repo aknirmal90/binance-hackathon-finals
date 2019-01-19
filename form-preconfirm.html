@@ -47,14 +47,14 @@
 					<table>
 						<tr>
 							<td style="text-align:center"><h2>Risk Score</h2></td>
-							<td style="text-align:center"><h2>Premium %</h2></td>
-							<td style="text-align:center"><h2>Premium Amount (ETH)</h2></td>
+							<td style="text-align:center"><h2>Premium</h2></td>
+							<td style="text-align:center"><h2>Premium Amount</h2></td>
 						</tr>
 
 						<tr>
 							<td style="text-align:center"><h4>{{ risk_score }}</h4></td>
-							<td style="text-align:center"><h4>{{ premium_rate }}</h4></td>
-							<td style="text-align:center"><h4>{{ premium }}</h4></td>
+							<td style="text-align:center"><h4>{{ premium_rate }}%</h4></td>
+							<td style="text-align:center"><h4>{{ premium }} ETH</h4></td>
 						</tr>
 					</table>
 				</div>
@@ -81,15 +81,15 @@
 		<div class="row">
 			{% if risk_score %}
 			<div class="col-4">
-				<input type="submit" value="Confirm Txn (with premium)" class="btn btn-primary">
+				<input type="submit" value="Confirm Txn (with premium)" class="btn btn-success">
 			</div>
 
 			<div class="col-4" align="center">
-				<input type="submit" value="Confirm Txn (without premium)" class="btn btn-primary">
+				<input type="submit" value="Confirm Txn (without premium)" class="btn btn-warning">
 			</div>
 
 			<div class="col-4" align="right">
-				<input type="submit" value="Cancel Txn" class="btn btn-primary">					
+				<input type="submit" value="Cancel Txn" class="btn btn-dark">					
 			</div>
 			{% endif %}					
 		</div>	

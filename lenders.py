@@ -73,13 +73,14 @@ def get_lenders():
 	lender_profile_sorted = [(key, value) for key, value in lender_profile.items()]
 	lender_profile_sorted.sort(key=lambda x: x[0])
 
-	continous_profile = []
-	prev_lender_risk = 0
+	# continous_profile = []
+	# prev_lender_risk = 0
 
-	for lender_risk, lender_premium in lender_profile_sorted:
-		continous_profile.extend([((i+1), lender_premium) for i in range(prev_lender_risk, lender_risk)])
-		prev_lender_risk = lender_risk
-	return continous_profile
+	# for lender_risk, lender_premium in lender_profile_sorted:
+	# 	continous_profile.extend([((i+1), lender_premium) for i in range(prev_lender_risk, lender_risk)])
+	# 	prev_lender_risk = lender_risk
+	# return continous_profile
+	return lender_profile_sorted
 
 
 def get_insurance_premium(risk_score, lenders_profile):

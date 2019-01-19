@@ -38,7 +38,7 @@ class QueryFormView(TemplateView):
 		premium_rate = get_insurance_premium(risk_score=risk_score, lenders_profile=lenders_features)
 		premium = premium_rate * risk_score
 
-		script, div = self._components(lenders_features)
+		script, div = self._components(lenders_features, risk_score)
 
 		context = {
 			'form': form, 
@@ -52,32 +52,61 @@ class QueryFormView(TemplateView):
 		}
 		return render(request, self.template_name, context)
 
-	def _components(self, lenders_features):		
+	def _components(self, lenders_features, risk_score):
 		x = [feature[0] for feature in lenders_features]
 		y = [feature[1] for feature in lenders_features]
 
-		source = ColumnDataSource(dict(x=x, y=y))
+		# source = ColumnDataSource(dict(x=x, y=y))
 		t = Title()
 		t.text = 'Risk Profile for Lenders'
 
-		plot = Plot(
-		    title=t, plot_width=500, plot_height=300,
-		    h_symmetry=False, v_symmetry=False, min_border=0, toolbar_location=None)
+		# plot = Plot(
+		#     title=t, plot_width=500, plot_height=300,
+		#     h_symmetry=False, v_symmetry=False, min_border=0, toolbar_location=None)
 
-		glyph1 = Step(x="x", y="y", line_color="#f46d43", mode="before", color='black')
-		plot.add_glyph(source, glyph1)		
-		plot.xaxis.ticker = x
-		plot.yaxis.ticker = y
+		# glyph1 = Step(x="x", y="y", line_color="#f46d43", mode="before", color='black')
+		# plot.add_glyph(source, glyph1)		
+		# plot.xaxis.ticker = x
+		# plot.yaxis.ticker = y
 
-		xaxis = LinearAxis(axis_label="Risk Score")
-		plot.add_layout(xaxis, 'below')
+		# xaxis = LinearAxis(axis_label="Risk Score")
+		# plot.add_layout(xaxis, 'below')
 
-		yaxis = LinearAxis(axis_label="% Premium Payable")
-		plot.add_layout(yaxis, 'left')
+		# yaxis = LinearAxis(axis_label="% Premium Payable")
+		# plot.add_layout(yaxis, 'left')
 
-		plot.xgrid.grid_line_color = None
-		plot.y_range.start = 0
-		script, div = components(plot)
+		# plot.xgrid.grid_line_color = None
+		# plot.y_range.start = 0
+
+		p = figure(
+			plot_width=600, 
+			plot_height=300,
+			x_axis_label='Risk Score',
+			y_axis_label='Premium (in ETH)',
+			title=t,
+			x_range=(0,100),
+			y_range=(0,100)
+		)		
+
+		risk_appetities = [lender[0] for lender in lenders_features]
+		colors = ["gray" for i in range(len(lenders_features))]
+
+		index = 0
+		for risk, premium in lenders_features:
+			if risk >= risk_score:
+				break
+			index = lenders_features.indexOf(risk)
+		colors[index] = 'red'
+
+		p.quad(
+			top=[lender[1] for lender in lenders_features], 
+			bottom=[0 for i in range(len(lenders_features))], 
+			left=[0]+risk_appetities[:-1],
+		    right=risk_appetities, 
+		    color=colors
+		   )
+
+		script, div = components(p)
 		return script, div
 
 
