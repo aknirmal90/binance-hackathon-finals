@@ -43,7 +43,7 @@ ABI = json.loads(abi)
 
 def lenders():
     w3 = Web3(Web3.HTTPProvider("https://ropsten.infura.io/v3/41d6ff4c88864dd996974369a8f27c81"))
-    contract = w3.eth.contract(address='0x42D2B6398244a93a8c95B4942d184dA8bEe88a83', abi=ABI)
+    contract = w3.eth.contract(address='0x56A3138c0Cb79674EC56E4fc2217033c1f438845', abi=ABI)
     i = 0
     lenders = []
     while i < 10:
