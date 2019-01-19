@@ -50,6 +50,7 @@ class QueryFormView(TemplateView):
 			'premium_rate': premium_rate,
 			'premium': premium
 		}
+		import pdb; pdb.set_trace();
 		return render(request, self.template_name, context)
 
 	def _components(self, lenders_features):		
@@ -94,3 +95,11 @@ def api_view(request):
 def graph_view(request):
 	address = request.GET['destination_address']
 	return JsonResponse(nodes_by_address(address), safe=False)
+
+
+class GraphVizView(TemplateView):
+
+	template_name = 'graph.html'
+
+	def get(self, request):
+		return render(request, self.template_name, {})

@@ -44,6 +44,18 @@
 			<div class="col-2"></div>
 		</div>
 
+		{% if not risk_score %}
+			<div class="row">
+				<div class="col-2"></div>
+				<div class="col-8">
+					Risk Score {{ risk_score }}
+					Premium % {{ premium_rate }}
+					Premium Amount (ETH) {{ premium_amount }}
+				</div>
+				<div class="col-2"></div>
+			</div>
+		{% endif %}
+
 		<div class="row">			
 			{% if risk_score %}
 				<div class="col-2"></div>

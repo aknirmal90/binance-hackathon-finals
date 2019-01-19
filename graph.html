@@ -12,6 +12,7 @@
 	<script src="{% static 'radar-chart.js' %}"></script>
 	<link rel="stylesheet" href="{% static 'radar-chart.css' %}" type="text/css" media="all">
 	<script src="https://code.jquery.com/jquery-3.3.1.js" integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60=" crossorigin="anonymous"></script>
+
 	<script type="text/javascript" src="{% static 'vis.min.js' %}"></script>
 	<link href="{% static 'vis.css' %}" rel="stylesheet" type="text/css" />
 </head>
@@ -382,9 +383,6 @@
             };
 
         }
-
-
-
 
         $('#fullscreen').click(function(){
             $('#graph_window').toggleClass('fullscreen');
