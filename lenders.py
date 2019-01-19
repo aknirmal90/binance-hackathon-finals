@@ -43,7 +43,7 @@ ABI = json.loads(abi)
 
 def get_lenders():
 	w3 = Web3(Web3.HTTPProvider("https://ropsten.infura.io/v3/41d6ff4c88864dd996974369a8f27c81"))
-	escrow_address='0x42D2B6398244a93a8c95B4942d184dA8bEe88a83'
+	escrow_address='0x56A3138c0Cb79674EC56E4fc2217033c1f438845'
 	contract = w3.eth.contract(address=escrow_address, abi=ABI)
 
 	i = 0

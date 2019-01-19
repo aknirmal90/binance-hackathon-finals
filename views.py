@@ -28,10 +28,12 @@ class QueryFormView(TemplateView):
 			return render(request, self.template_name, context)
 
 		address = request.POST['destination_address']
+		amount = request.POST['transaction_amount']
+
 		risk_metrics = get_address_risk_metrics(address)
 		risk_score = risk_metrics['risk_score']
 		risk_features = risk_metrics['risk_features']
-		lenders_features = get_lenders()
+		lenders_features = get_lenders(amount=amount)
 		script, div = self._components(lenders_features)
 
 		context = {
