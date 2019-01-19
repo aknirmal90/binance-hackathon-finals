@@ -11,6 +11,7 @@ from bokeh.plotting import figure
 from bokeh.models.glyphs import Step
 from bokeh.models import ColumnDataSource, Plot, LinearAxis
 from bokeh.models.annotations import Title
+from graph import nodes_by_address
 
 
 class QueryFormView(TemplateView):
@@ -84,3 +85,7 @@ def api_view(request):
 		'risk_score': risk_score,
 		'risk_features': risk_features,
 	})
+
+def graph_view(request):
+	address = request.GET['destination_address']
+	return JsonResponse(nodes_by_address(address), safe=False)

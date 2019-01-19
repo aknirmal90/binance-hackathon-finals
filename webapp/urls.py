@@ -16,10 +16,11 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from django.views.generic import TemplateView
-from views import QueryFormView, api_view
+from views import QueryFormView, api_view, graph_view
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('form/', QueryFormView.as_view()),
-    path('api/', api_view)
+    path('api/', api_view),
+    path('graph/', graph_view)
 ]
