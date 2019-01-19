@@ -1,0 +1,11 @@
+runtime: python
+
+entrypoint: gunicorn -b :$PORT webapp.wsgi
+env: flex
+
+env_variables:
+  SECRET_KEY: 'secret'
+  DEBUG: 'False'
+
+runtime_config:
+  python_version: 3

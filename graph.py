@@ -3,6 +3,7 @@ import json
 engine = sa.create_engine('clickhouse://safu_hackathon:SatisfactionGuaranteed@data.bloxy.info:8123/production?readonly=true')
 conn = engine.connect()
 
+
 def node_of(t):
     address = t[1]
     annotation = t[6]

@@ -38,10 +38,10 @@ def get_address_risk_metrics(address):
         'active_out_days_percentage'
     ]
 
+    feature_df = feature_map_ds3([address])
+    feature_df = feature_df[features]
+
     try:
-        feature_df = feature_map_ds3([address])
-        feature_df = feature_df[features]
-        
         X_ = feature_df.values
         X_ = scaler.transform(X_)  # create an np.array of independent variables
 
