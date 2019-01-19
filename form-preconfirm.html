@@ -133,5 +133,9 @@
 		RadarChart.defaultConfig.h = 300;		
 		RadarChart.draw(".radar-container", data);
 	</script>
+
 	<script src="{% static 'graph.js' %}"></script>
+	<script type="text/javascript">
+		drawGraph("{{ destination_address }}");
+	</script>
 </html>

@@ -10,10 +10,25 @@ df = pd.read_csv('./dataset.csv')
 
 features = [
     'is_positive',
+    # 'xbc_having_div',
+    # 'xbc_withdrawals',
+    # 'xbc_regular',
+    # 'ratio_txncnt_outflow_inflow',
+    # 'ratio_median_out_amount',
+    # 'ratio_pay_more_than_once',
+    # 'ratio_stddev_in_amount',
+    # 'active_in_days_percentage',
+    # 'active_out_days_percentage',
+    # 'frequency_days_in',
+    # 'frequency_days_out',
+    # 'frequency_stddev_days_in',
+    # 'frequency_stddev_days_out'    
+    'active_out_days_percentage',
+    'ratio_out_in_uniq_addresses',
+    'percentage_out_internal_volume',
     'xbc_having_div',
-    'xbc_withdrawals',
-    'xbc_regular',
-    'ratio_txncnt_outflow_inflow'
+    'ratio_txncnt_outflow_inflow',
+    'ratio_txnvol_outflow_inflow',
 ]
 features_df = df[features]
 
@@ -23,24 +38,36 @@ y = features_df.iloc[:, 0].values  # create an np.array of dependent variables
 scaler = StandardScaler()
 X = scaler.fit_transform(X)
 
-X_train, X_test, y_train, y_test = train_test_split(X, y)
-rf_class = RandomForestClassifier(n_estimators=500)
+X_train, X_test, y_train, y_test = train_test_split(X, y, random_state=42)
+rf_class = RandomForestClassifier(n_estimators=500, random_state=42)
 rf_class.fit(X_train, y_train)
 
 
 def get_address_risk_metrics(address):
     features = [
+        # 'xbc_having_div',
+        # 'xbc_withdrawals',
+        # 'xbc_regular',
+        # 'ratio_txncnt_outflow_inflow',
+        # 'ratio_median_out_amount',
+        # 'ratio_pay_more_than_once',
+        # 'ratio_stddev_in_amount',        
+        # 'active_in_days_percentage',
+        # 'active_out_days_percentage',
+        # 'frequency_days_in',
+        # 'frequency_days_out',
+        # 'frequency_stddev_days_in',
+        # 'frequency_stddev_days_out'        
+        'active_out_days_percentage',
+        'ratio_out_in_uniq_addresses',
+        'percentage_out_internal_volume',
         'xbc_having_div',
-        'xbc_withdrawals',
-        'xbc_regular',
         'ratio_txncnt_outflow_inflow',
-        'active_in_days_percentage',
-        'active_out_days_percentage'
+        'ratio_txnvol_outflow_inflow',        
     ]
 
     feature_df = feature_map_ds3([address])
     feature_df = feature_df[features]
-
     try:
         X_ = feature_df.values
         X_ = scaler.transform(X_)  # create an np.array of independent variables

@@ -72,7 +72,6 @@ def feature_map_ds3(address_array, is_positive=True):
                                                               aggregates.loc[address]  if address in aggregates.index else None,
                                                               contract_metrics(address),
                                                               is_positive), 
-                                                              address_array))
-    
+                                                              address_array))    
     dataFrame = pd.DataFrame(feature_list)
     return dataFrame.set_index('address').fillna(0)

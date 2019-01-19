@@ -182,7 +182,7 @@ def contract_metrics(addr):
 
         with urllib.request.urlopen(url) as response:
             info = response.info()
-            bytelen = int(info['Length'])
+            bytelen = int(info['Content-Length'])
             if bytelen > 3000000:
                 print(f'skipped smart contract with byte length {bytelen}.')
                 return None
@@ -203,8 +203,7 @@ def contract_metrics(addr):
             payable_count+=1
         loc += len(func['print'].split('\n'))
     
-    features = get_features(contract, func_count)
-    
+    features = get_features(contract, func_count)    
     
     #func['print']
     #str(func['trace'])

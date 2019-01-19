@@ -36,7 +36,7 @@ class QueryFormView(TemplateView):
 		risk_features = risk_metrics['risk_features']
 		lenders_features = get_lenders()
 		premium_rate = get_insurance_premium(risk_score=risk_score, lenders_profile=lenders_features)
-		premium = premium_rate * risk_score
+		premium = premium_rate * float(amount) / 100.00
 
 		script, div = self._components(lenders_features, risk_score)
 
@@ -48,7 +48,7 @@ class QueryFormView(TemplateView):
 			'div': div,
 			'destination_address': address,
 			'premium_rate': premium_rate,
-			'premium': premium / 100.00
+			'premium': premium 
 		}
 		return render(request, self.template_name, context)
 
@@ -82,7 +82,7 @@ class QueryFormView(TemplateView):
 			plot_width=600, 
 			plot_height=300,
 			x_axis_label='Risk Score',
-			y_axis_label='Premium (in ETH)',
+			y_axis_label='Premium (in %)',
 			title=t,
 			x_range=(0,100),
 			y_range=(0,100)
@@ -91,12 +91,13 @@ class QueryFormView(TemplateView):
 		risk_appetities = [lender[0] for lender in lenders_features]
 		colors = ["gray" for i in range(len(lenders_features))]
 
-		index = 0
-		for risk, premium in lenders_features:
+		for i, (risk, premium) in enumerate(lenders_features):
+			if risk >= 90:
+				i = -1
+				break
 			if risk >= risk_score:
 				break
-			index = lenders_features.indexOf(risk)
-		colors[index] = 'red'
+		colors[i] = 'red'
 
 		p.quad(
 			top=[lender[1] for lender in lenders_features], 
