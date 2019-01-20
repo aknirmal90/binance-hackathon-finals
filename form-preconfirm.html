@@ -50,27 +50,7 @@
 			<div class="col-2"></div>
 		</div>
 
-		<div class="row">
-			{% if risk_score %}			
-				<div class="col-2"></div>
-				<div class="col-8" style="text-align:center">
-					<table>
-						<tr>
-							<td style="text-align:center"><h2>Risk Score</h2></td>
-							<td style="text-align:center"><h2>Insurance Premium</h2></td>
-							<td style="text-align:center"><h2>Premium Amount</h2></td>
-						</tr>
 
-						<tr>
-							<td style="text-align:center"><h4>{{ risk_score }}</h4></td>
-							<td style="text-align:center"><h4>{{ premium_rate }}%</h4></td>
-							<td style="text-align:center"><h4>{{ premium }} ETH</h4></td>
-						</tr>
-					</table>
-				</div>
-				<div class="col-2"></div>
-			{% endif %}				
-		</div>
 
 		<div class="container">
 			{% if risk_score %}						
@@ -101,10 +81,65 @@
 	</div>
 
 
-	<div class="container">
-		<hr>
+	<div class="row" style="margin-top: 50px;">
+		{% if risk_score %}
+
+
+
+		<div class="col-2"></div>
+		<div class="col-8" style="text-align:center">
+
+			<div class="well well-lg">
+
+			<table>
+				<tr>
+					<td style="text-align:center"><h1>Risk Score</h1></td>
+					<td style="text-align:center"><h1>Insurance Premium</h1></td>
+					<td style="text-align:center"><h1>Premium Amount</h1></td>
+				</tr>
+
+				<tr>
+					<td style="text-align:center"><h2>{{ risk_score }}</h2></td>
+					<td style="text-align:center"><h2>{{ premium_rate }}%</h2></td>
+					<td style="text-align:center"><h2>{{ premium }} ETH</h2></td>
+				</tr>
+
+				<tr>
+					{% if risk_score < 20 %}
+					<td style="background-color: #00ff26; color: white; font-weight: bold; font-size: 20px; text-align:center; padding: 20px;">
+						SAFU
+						<span class="glyphicon glyphicon-thumbs-up" style="color: #00ff26;font-size: 20px; color: white;"></span>
+					</td>
+
+					{% elif risk_score < 60 %}
+					<td style="background-color: #ff8000; color: white; font-weight: bold; font-size: 20px; text-align:center; padding: 20px;">
+						BE CAREFULL
+						<span class="glyphicon glyphicon-warning-sign" style="color: #ff8000;font-size: 20px; color: white;"></span>
+					</td>
+
+					{% else %}
+					<td style="background-color: #ff0100; color: white; font-weight: bold; font-size: 20px; text-align:center; padding: 20px;">
+						NOT SAFU
+						<span class="glyphicon glyphicon-thumbs-up" style="color: #ff0100;font-size: 20px; color: white;"></span>
+					</td>
+					{% endif %}
+				</tr>
+
+			</table>
+
+			</div>
+		</div>
+		<div class="col-2"></div>
+		{% endif %}
+	</div>
+
+	{% if risk_score %}
+	<div class="container" style="height: 300px;">
+		<h1>Select one of the options:</h1>
 		<div class="row">
-			{% if risk_score %}
+
+
+
 			<div class="col-4">
 				<input type="submit" value="SAFU Insured Transaction (with {{ premium }} ETH premium)" class="btn btn-success btn-lg">
 			</div>
@@ -116,9 +151,10 @@
 			<div class="col-4" align="right">
 				<input type="submit" value="Cancel Txn" class="btn btn-dark btn-lg">
 			</div>
-			{% endif %}					
+
 		</div>	
 	</div>
+	{% endif %}
 
 </body>
 
